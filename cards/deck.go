@@ -31,3 +31,10 @@ func (d deck) print() {
 		fmt.Println(i, card)
 	}
 }
+
+// return multiple values from one function
+func deal(d deck, handSize int) (deck, deck) {
+	// aSlice[startIndex:endButNotIncludedIndex]
+	// creates a new reference which points to a subsection of a slice
+	return d[:handSize], d[handSize:]
+}
