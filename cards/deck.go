@@ -8,10 +8,24 @@ import (
 // which is essentially a slice of strings
 type deck []string
 
-// Define a function in the custom type
-// whose "receiver" is of the type "deck"
-// d is the copy of that type who invokes this function on itself
-// it is like "this" in JavaScript
+// function to create a new deck
+// returns a deck
+func newDeck() deck {
+	cards := deck{} // an empty deck slice
+
+	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
+	cardValues := []string{"Ace", "Two", "Three", "Four"}
+
+	// "_" tells go compiler that we know here is a variable but we don't need to use it
+	for _, suit := range cardSuits {
+		for _, value := range cardValues {
+			cards = append(cards, value+" of "+suit)
+		}
+	}
+
+	return cards
+}
+
 func (d deck) print() {
 	for i, card := range d {
 		fmt.Println(i, card)
