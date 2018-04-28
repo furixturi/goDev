@@ -7,15 +7,6 @@ import (
 func main() {
 
 	cards := newDeck()
+	fmt.Println(cards.toString())
 
-	// call a function which returns two values
-	hand, remainingCards := deal(cards, 5)
-
-	hand.print()
-	fmt.Println("================")
-	remainingCards.print()
-}
-
-func newCard() string {
-	return "Ace of Spades"
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 type deck []string
@@ -32,5 +33,5 @@ func deal(d deck, handSize int) (deck, deck) {
 }
 
 func (d deck) toString() string {
-	[]string(d) // convert deck d to a slice of type string * type conversion: type(var)
+	return strings.Join([]string(d), ",") // Join elements in a string slice with the separator ","
 }
