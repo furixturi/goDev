@@ -1,8 +1,8 @@
-package main
+package main // executable package
 
-import "fmt"
+import "fmt" // format library
 
-func main() {
+func main() { // execution entry point
 	fmt.Println("Hi there!")
 }
 
