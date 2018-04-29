@@ -26,7 +26,9 @@ func main() {
 		},
 	}
 	jim.print()
-	jim.updateName("Alex")
+
+	jimPointer := &jim // & operator gives the RAM address of the variable it leads
+	jimPointer.updateName("Jimmy")
 	jim.print()
 }
 
@@ -34,10 +36,7 @@ func (p person) print() {
 	fmt.Printf("%+v", p)
 }
 
-func (p person) updateName(newFirstName string) {
-	p.firstName = newFirstName //This does not work
-	// Because go functions pass parameters by value
-	// so the p inside updateName function is not the same instance
-	// as the reveiver given into in
-	// but a copy of its value
+// *type is a pointer type of values that points to a value of that specific type
+func (pointerToPerson *person) updateName(newFirstName string) {
+	(*pointerToPerson).firstName = newFirstName // * operator gives the in the RAM address
 }
