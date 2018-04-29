@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // Definition of a new type person which is essentially a struct
 type person struct {
 	firstName string
@@ -7,7 +9,8 @@ type person struct {
 }
 
 func main() {
-	// One way to instantiate a struct
-	// Relying on the order to decide the value of each entry
-	alex := person{"Alex", "Anderson"}
+	// Another way to instantiate a struct
+	alex := person{firstName: "Alex", lastName: "Anderson"}
+
+	fmt.Println(alex)
 }
