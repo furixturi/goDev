@@ -13,6 +13,7 @@ type person struct {
 func main() {
 	// A third way to instantiate a struct
 	var alex person // Declare a variable of type person
-	fmt.Println(alex)
+	alex.firstName = "Alex"
+	alex.lastName = "Anderson"
 	fmt.Printf("%+v", alex)
 }
