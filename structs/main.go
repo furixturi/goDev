@@ -6,14 +6,25 @@ import (
 
 // Definition of a new type person which is essentially a struct
 type person struct {
-	firstName string
+	firstName string // Definition: No colon, no comma
 	lastName  string
+	contactInfo
+}
+
+type contactInfo struct {
+	email   string
+	zipCode int
 }
 
 func main() {
-	// A third way to instantiate a struct
-	var alex person // Declare a variable of type person
-	alex.firstName = "Alex"
-	alex.lastName = "Anderson"
-	fmt.Printf("%+v", alex)
+	jim := person{
+		firstName: "Jim",
+		lastName:  "Party",
+		contactInfo: contactInfo{
+			email:   "jim@gmail.com",
+			zipCode: 94000,
+		},
+	}
+	fmt.Printf("%+v", jim)
+
 }
