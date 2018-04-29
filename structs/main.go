@@ -35,5 +35,5 @@ func (p person) print() {
 }
 
 func (p person) updateName(newFirstName string) {
-	p.firstName = newFirstName
+	p.firstName = newFirstName //This does not work
 }
