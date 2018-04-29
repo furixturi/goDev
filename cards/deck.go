@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 type deck []string
@@ -55,9 +56,17 @@ func newDeckFromFile(filename string) deck {
 }
 
 func (d deck) shuffle() {
+	// The go rand by default always use the same seed, so every time we get the same random number
+
+	// Therefore we need to generate a new rand instance every time we want a random number
+	// To create a new rand, we need a new source as the seed
+	// Which is a int64 (64-bit integer)
+	// We can use a UnixNano for that
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
 	for i := range d {
-		newPosition := rand.Intn(len(d) - 1) //get the length of the deck slice by len(slice)
-		// generate a random integer between 0 and the last index of deck slice
-		d[i], d[newPosition] = d[newPosition], d[i] // swap!
+		newPosition := r.Intn(len(d) - 1)
+		d[i], d[newPosition] = d[newPosition], d[i]
 	}
 }
