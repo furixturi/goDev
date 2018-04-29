@@ -36,4 +36,8 @@ func (p person) print() {
 
 func (p person) updateName(newFirstName string) {
 	p.firstName = newFirstName //This does not work
+	// Because go functions pass parameters by value
+	// so the p inside updateName function is not the same instance
+	// as the reveiver given into in
+	// but a copy of its value
 }
