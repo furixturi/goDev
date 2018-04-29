@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
 )
@@ -10,7 +11,7 @@ import (
 type deck []string
 
 func newDeck() deck {
-	cards := deck{} // an empty deck slice
+	cards := deck{}
 
 	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
 	cardValues := []string{"Ace", "Two", "Three", "Four"}
@@ -43,16 +44,20 @@ func (d deck) saveToFile(filename string) error {
 }
 
 func newDeckFromFile(filename string) deck {
-	bs, err := ioutil.ReadFile(filename) // ReadFile returns a byteslice and an error (nil if no error occured)
+	bs, err := ioutil.ReadFile(filename)
 	if err != nil {
-		// Option 1: log the error and return a call to newDeck() as a fail save solution
-		// Option 2: Log the error and quit the program
 		fmt.Println("Error: ", err)
 		os.Exit(1)
 	}
 
 	s := strings.Split(string(bs), ",")
-	// convert the byte slice to string,
-	// then split the string with "," to get a string slice
-	return deck(s) // convert the sting slice to a deck, which is essentially the same thing
+	return deck(s)
+}
+
+func (d deck) shuffle() {
+	for i := range d {
+		newPosition := rand.Intn(len(d) - 1) //get the length of the deck slice by len(slice)
+		// generate a random integer between 0 and the last index of deck slice
+		d[i], d[newPosition] = d[newPosition], d[i] // swap!
+	}
 }
