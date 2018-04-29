@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Definition of a new type person which is essentially a struct
 type person struct {
@@ -9,8 +11,8 @@ type person struct {
 }
 
 func main() {
-	// Another way to instantiate a struct
-	alex := person{firstName: "Alex", lastName: "Anderson"}
-
+	// A third way to instantiate a struct
+	var alex person // Declare a variable of type person
 	fmt.Println(alex)
+	fmt.Printf("%+v", alex)
 }
