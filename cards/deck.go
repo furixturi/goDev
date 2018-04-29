@@ -56,12 +56,6 @@ func newDeckFromFile(filename string) deck {
 }
 
 func (d deck) shuffle() {
-	// The go rand by default always use the same seed, so every time we get the same random number
-
-	// Therefore we need to generate a new rand instance every time we want a random number
-	// To create a new rand, we need a new source as the seed
-	// Which is a int64 (64-bit integer)
-	// We can use a UnixNano for that
 	source := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(source)
 
