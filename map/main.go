@@ -11,7 +11,8 @@ func main() {
 	// }
 
 	// go will initiate a map with zero value, which is map[]
-	var colors map[string]string
+	// var colors map[string]string
 
+	colors := make(map[string]string)
 	fmt.Println(colors)
 }
