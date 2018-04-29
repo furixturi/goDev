@@ -27,8 +27,8 @@ func main() {
 	}
 	jim.print()
 
-	jimPointer := &jim // & operator gives the RAM address of the variable it leads
-	jimPointer.updateName("Jimmy")
+	jim.updateName("Jimmy") // Go's short hand way of getting the pointer of a value then pass the pointer to the function which expects a pointer of that value type
+
 	jim.print()
 }
 
