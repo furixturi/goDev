@@ -5,14 +5,13 @@ import (
 )
 
 func main() {
-	// colors := map[string]string{
-	// 	"red":   "#ff0000",
-	// 	"green": "#00ff00",
-	// }
-
-	// go will initiate a map with zero value, which is map[]
-	// var colors map[string]string
-
 	colors := make(map[string]string)
+
+	// To add or access a key value pair in a map,
+	// Always use square bracket syntax
+	// The dot syntax won't work because keys in map are static typed
+	colors["white"] = "#ffffff"
+
+	delete(colors, "white")
 	fmt.Println(colors)
 }
