@@ -1,7 +1,8 @@
 package main
 
 func main() {
-
-	cards := newDeck()
-	cards.saveToFile("my_cards")
+	cards := newDeckFromFile("my_cards")
+	cards.print()
+	cardsDoesntExist := newDeckFromFile("doesnt_exist")
+	cardsDoesntExist.print()
 }

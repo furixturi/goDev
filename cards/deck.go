@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -37,11 +38,21 @@ func (d deck) toString() string {
 	return strings.Join([]string(d), ",")
 }
 
-// Return the error from WriteFile
 func (d deck) saveToFile(filename string) error {
-	// Write to a file with the filename in the 1st parameter
-	// With a byte slice in the 2nd parameter
-	// If it doesn't exist, create one
-	// With the permission code in the 3rd parameter
 	return ioutil.WriteFile(filename, []byte(d.toString()), 777)
+}
+
+func newDeckFromFile(filename string) deck {
+	bs, err := ioutil.ReadFile(filename) // ReadFile returns a byteslice and an error (nil if no error occured)
+	if err != nil {
+		// Option 1: log the error and return a call to newDeck() as a fail save solution
+		// Option 2: Log the error and quit the program
+		fmt.Println("Error: ", err)
+		os.Exit(1)
+	}
+
+	s := strings.Split(string(bs), ",")
+	// convert the byte slice to string,
+	// then split the string with "," to get a string slice
+	return deck(s) // convert the sting slice to a deck, which is essentially the same thing
 }
