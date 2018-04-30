@@ -6,8 +6,6 @@ import (
 )
 
 func main() {
-
-	// Check if the following sites are up and responding to http traffic
 	links := []string{
 		"http://google.com",
 		"http://facebook.com",
@@ -16,17 +14,29 @@ func main() {
 		"http://amazon.com",
 	}
 
+	// make a channel of type string to communicate between child go routines to the main go routine
+	c := make(chan string)
+
 	for _, link := range links {
-		checkLink(link)
+		// A function with blocking code will be called
+		// We want to use it in a child go routine
+		// So we need to pass the channel to it
+		go checkLink(link, c) // initiate a brand new go routine with the "go" keyword
 	}
+	fmt.Println(<-c) //wait for the channel to send back one message
+	// then send it to be printed to the console
+	// The main will exit after this is done
 }
 
-func checkLink(link string) {
+func checkLink(link string, c chan string) {
 	_, err := http.Get(link)
-	if err == nil {
+	if err != nil {
 		fmt.Println(link, "might be down!")
+		// Send a message to the channel with <-
+		c <- "Might be down I think"
 		return
 	}
 
 	fmt.Println(link, "is up!")
+	c <- "Yep, it's up"
 }
