@@ -14,3 +14,6 @@ func main() {
 	}
 	io.Copy(os.Stdout, f)
 }
+
+// Just for fun: build main.go and run it with main.go
+// > ./main main.go
