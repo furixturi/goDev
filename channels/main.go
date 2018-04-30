@@ -23,9 +23,8 @@ func main() {
 		// So we need to pass the channel to it
 		go checkLink(link, c) // initiate a brand new go routine with the "go" keyword
 	}
-	fmt.Println(<-c) //wait for the channel to send back one message
-	// then send it to be printed to the console
-	// The main will exit after this is done
+	fmt.Println(<-c)
+	fmt.Println(<-c) // Now tell the main routine that we're waiting for two messages from the channel
 }
 
 func checkLink(link string, c chan string) {
