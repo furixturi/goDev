@@ -18,3 +18,9 @@ func printMap(c map[string]string) {
 		fmt.Println("Hex code for", color, "is", hex)
 	}
 }
+
+// map is a reference type, its keys are indexed so we can loop
+// keys can be deleted after added
+
+// struct is a value type, its keys aren't typed nor indexed
+// all keys must be known at compile time
