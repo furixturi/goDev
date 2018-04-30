@@ -8,12 +8,16 @@ import (
 
 func main() {
 	res, err := http.Get("http://google.com")
-
-	// Error handling:
 	if err != nil {
-		fmt.Println("Error: ", err) // Log the error
-		os.Exit(1)                  // Exit the program with code other than 0
+		fmt.Println("Error: ", err)
+		os.Exit(1)
 	}
 
-	fmt.Println(res)
+	// Initiate an empty byte slice of length 99999
+	// Because the Read function of the http response
+	// body cannot auto shrink or expand
+	// the byte slice it is given
+	bs := make([]byte, 99999)
+	res.Body.Read(bs)
+	fmt.Println(string(bs))
 }
