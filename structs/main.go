@@ -6,9 +6,9 @@ import (
 
 // Definition of a new type person which is essentially a struct
 type person struct {
-	firstName string // Definition: No colon, no comma
-	lastName  string
-	contactInfo
+	firstName   string // Definition: No colon, no comma
+	lastName    string
+	contactInfo // We made a custom type called contactInfo
 }
 
 type contactInfo struct {
