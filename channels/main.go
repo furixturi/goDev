@@ -22,10 +22,10 @@ func main() {
 	}
 
 	for l := range c {
-		go func() { // Define the function literal
-			time.Sleep(1 * time.Second)
-			checkLink(l, c)
-		}() // run it
+		go func(link string) { // Define the function literal
+			time.Sleep(5 * time.Second)
+			checkLink(link, c) //Never try to access variables in other go routines directly, but pass them by value using go's pass by value function feature!
+		}(l)
 	}
 }
 
