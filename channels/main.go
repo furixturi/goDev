@@ -14,24 +14,24 @@ func main() {
 		"http://amazon.com",
 	}
 
-	// make a channel of type string to communicate between child go routines to the main go routine
 	c := make(chan string)
 
 	for _, link := range links {
-		// A function with blocking code will be called
-		// We want to use it in a child go routine
-		// So we need to pass the channel to it
-		go checkLink(link, c) // initiate a brand new go routine with the "go" keyword
+		go checkLink(link, c)
 	}
-	fmt.Println(<-c)
-	fmt.Println(<-c) // Now tell the main routine that we're waiting for two messages from the channel
+
+	// This for loop runs asynchonous
+	// Every time a new message is received
+	// It executes the next loop
+	for i := 0; i < len(links); i++ {
+		fmt.Println(<-c)
+	}
 }
 
 func checkLink(link string, c chan string) {
 	_, err := http.Get(link)
 	if err != nil {
 		fmt.Println(link, "might be down!")
-		// Send a message to the channel with <-
 		c <- "Might be down I think"
 		return
 	}
