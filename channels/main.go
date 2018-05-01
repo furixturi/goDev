@@ -22,6 +22,7 @@ func main() {
 	}
 
 	for l := range c {
+		// This throttles the main routine and in turn our application
 		time.Sleep(1 * time.Second) //Put the main routine to sleep for a sec before doing the next check
 		go checkLink(l, c)
 	}
