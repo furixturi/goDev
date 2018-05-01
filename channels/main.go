@@ -20,10 +20,14 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	// Start a new go routine to check the link
-	// Every time we've got a result back from the channel
-	for {
-		go checkLink(<-c, c)
+	// for {
+	//	go checkLink(<-c, c)
+	// }
+
+	// An alternative way of writing the loop:
+	// For every message that the channel c sent back
+	for l := range c {
+		go checkLink(l, c)
 	}
 }
 
