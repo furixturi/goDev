@@ -20,11 +20,10 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	// This for loop runs asynchonous
-	// Every time a new message is received
-	// It executes the next loop
-	for i := 0; i < len(links); i++ {
-		fmt.Println(<-c)
+	// Start a new go routine to check the link
+	// Every time we've got a result back from the channel
+	for {
+		go checkLink(<-c, c)
 	}
 }
 
@@ -32,10 +31,12 @@ func checkLink(link string, c chan string) {
 	_, err := http.Get(link)
 	if err != nil {
 		fmt.Println(link, "might be down!")
-		c <- "Might be down I think"
+		// Now we use the channel to pass the link which was just checked
+		c <- link
 		return
 	}
 
 	fmt.Println(link, "is up!")
-	c <- "Yep, it's up"
+	// Now we use the channel to pass the link which was just checked
+	c <- link
 }
