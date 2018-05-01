@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -20,13 +21,8 @@ func main() {
 		go checkLink(link, c)
 	}
 
-	// for {
-	//	go checkLink(<-c, c)
-	// }
-
-	// An alternative way of writing the loop:
-	// For every message that the channel c sent back
-	for l := range c { // Watch the channel c, as soon as a value comes out of it, assign it to l
+	for l := range c {
+		time.Sleep(1 * time.Second) //Put the main routine to sleep for a sec before doing the next check
 		go checkLink(l, c)
 	}
 }
